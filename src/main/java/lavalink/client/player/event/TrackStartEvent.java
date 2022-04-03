@@ -27,7 +27,7 @@ import lavalink.client.player.IPlayer;
 
 public class TrackStartEvent extends PlayerEvent {
 
-    private AudioTrack track;
+    private final AudioTrack track;
 
     public TrackStartEvent(IPlayer player, AudioTrack track) {
         super(player);

@@ -28,7 +28,10 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
 import lavalink.client.LavalinkUtil;
 import lavalink.client.player.LavalinkPlayer;
-import lavalink.client.player.event.*;
+import lavalink.client.player.event.PlayerEvent;
+import lavalink.client.player.event.TrackEndEvent;
+import lavalink.client.player.event.TrackExceptionEvent;
+import lavalink.client.player.event.TrackStuckEvent;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONObject;
@@ -192,7 +195,7 @@ public class LavalinkSocket extends ReusableWebSocket {
     @Override
     public void onError(Exception ex) {
         if (ex instanceof ConnectException) {
-            log.warn("Failed to connect to " + getRemoteUri() + ", retrying in " + getReconnectInterval()/1000 + " seconds.");
+            log.warn("Failed to connect to " + getRemoteUri() + ", retrying in " + getReconnectInterval() / 1000 + " seconds.");
             return;
         }
 

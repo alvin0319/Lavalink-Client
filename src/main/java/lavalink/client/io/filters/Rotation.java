@@ -3,7 +3,7 @@ package lavalink.client.io.filters;
 import javax.annotation.CheckReturnValue;
 
 @SuppressWarnings("unused")
-public class Rotation{
+public class Rotation {
     private float frequency = 2.0f;
 
     public float getFrequency() {

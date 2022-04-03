@@ -57,13 +57,12 @@ public class LavalinkUtil {
     }
 
     /**
-     *
-     * @param player the lavalink player that holds the track with data
+     * @param player  the lavalink player that holds the track with data
      * @param message the Base64 audio track
      * @return the AudioTrack with the user data stored in the player
      * @throws IOException if there is an IO problem
      */
-    public static AudioTrack toAudioTrackWithData(LavalinkPlayer player, String message) throws IOException{
+    public static AudioTrack toAudioTrackWithData(LavalinkPlayer player, String message) throws IOException {
         AudioTrack storedTrack = player.getPlayingTrack();
         AudioTrack messageTrack = toAudioTrack(message);
 
@@ -75,7 +74,6 @@ public class LavalinkUtil {
     }
 
     /**
-     *
      * @param message the Base64 audio track
      * @return the AudioTrack
      * @throws IOException if there is an IO problem

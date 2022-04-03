@@ -5,7 +5,7 @@ import javax.annotation.CheckReturnValue;
 @SuppressWarnings("unused")
 public class Timescale {
     private float speed = 1.0f;
-    private float pitch= 1.0f;
+    private float pitch = 1.0f;
     private float rate = 1.0f;
 
     public float getSpeed() {

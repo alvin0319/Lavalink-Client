@@ -21,7 +21,9 @@ public class JdaLavalink extends Lavalink<JdaLink> implements EventListener {
 
     private static final Logger log = LoggerFactory.getLogger(JdaLavalink.class);
 
-    /** JDA provider may be set at a later time */
+    /**
+     * JDA provider may be set at a later time
+     */
     @Nullable
     private Function<Integer, JDA> jdaProvider;
     private boolean autoReconnect = true;
@@ -73,7 +75,6 @@ public class JdaLavalink extends Lavalink<JdaLink> implements EventListener {
      *
      * @param shardId the ID of the shard
      * @return the JDA instance with the specified shard ID
-     *
      * @throws IllegalStateException if the JDA provider has not been initialised
      */
     @SuppressWarnings({"WeakerAccess", "unused"})
@@ -92,7 +93,6 @@ public class JdaLavalink extends Lavalink<JdaLink> implements EventListener {
      *
      * @param snowflake the snowflake of the shard
      * @return the JDA instance with the specified snowflake
-     *
      * @throws IllegalStateException if the JDA provider has not been initialised
      */
     @SuppressWarnings("WeakerAccess")

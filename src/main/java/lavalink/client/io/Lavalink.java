@@ -33,11 +33,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Lavalink<T extends Link> {
@@ -46,7 +42,9 @@ public abstract class Lavalink<T extends Link> {
 
     @SuppressWarnings("WeakerAccess")
     protected final int numShards;
-    /** User id may be set at a later time */
+    /**
+     * User id may be set at a later time
+     */
     @Nullable
     private String userId;
     private final ConcurrentHashMap<String, T> links = new ConcurrentHashMap<>();
@@ -83,14 +81,10 @@ public abstract class Lavalink<T extends Link> {
     }
 
     /**
-     *
-     * @param name
-     *         A name to identify this node. May show up in metrics and other places.
-     * @param serverUri
-     *         uri of the node to be added
-     * @param password
-     *         password of the node to be added
-     * @throws IllegalStateException if no userId has been set.
+     * @param name      A name to identify this node. May show up in metrics and other places.
+     * @param serverUri uri of the node to be added
+     * @param password  password of the node to be added
+     * @throws IllegalStateException    if no userId has been set.
      * @throws IllegalArgumentException if a node with that name already exists.
      * @see #setUserId(String)
      */
@@ -167,6 +161,7 @@ public abstract class Lavalink<T extends Link> {
 
     /**
      * The user id of this bot.
+     *
      * @throws IllegalStateException if any nodes are registered.
      */
     @SuppressWarnings("unused")

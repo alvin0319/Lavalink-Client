@@ -27,8 +27,8 @@ import lavalink.client.player.IPlayer;
 
 public class TrackExceptionEvent extends PlayerEvent {
 
-    private AudioTrack track;
-    private Exception exception;
+    private final AudioTrack track;
+    private final Exception exception;
 
     public TrackExceptionEvent(IPlayer player, AudioTrack track, Exception exception) {
         super(player);

@@ -145,7 +145,9 @@ abstract public class Link {
     }
 
     protected abstract void removeConnection();
+
     protected abstract void queueAudioDisconnect();
+
     protected abstract void queueAudioConnect(long channelId);
 
     /**
@@ -249,12 +251,13 @@ abstract public class Link {
      * Invoked when the remote Lavalink server reports that this Link's WebSocket to the voice server was closed.
      * This could be because of an expired voice session, that might have to be renewed.
      *
-     * @param code the RFC 6455 close code.
-     * @param reason the reason for closure, provided by the closing peer.
+     * @param code     the RFC 6455 close code.
+     * @param reason   the reason for closure, provided by the closing peer.
      * @param byRemote true if closed by Discord, false if closed by the Lavalink server.
      */
     @SuppressWarnings("unused")
-    public void onVoiceWebSocketClosed(int code, String reason, boolean byRemote) {}
+    public void onVoiceWebSocketClosed(int code, String reason, boolean byRemote) {
+    }
 
     public enum State {
         /**

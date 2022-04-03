@@ -30,7 +30,7 @@ import java.util.List;
 public class ReconnectTask implements Runnable {
 
     private static final Logger log = LoggerFactory.getLogger(ReconnectTask.class);
-    private Lavalink lavalink;
+    private final Lavalink lavalink;
 
     ReconnectTask(Lavalink lavalink) {
         this.lavalink = lavalink;

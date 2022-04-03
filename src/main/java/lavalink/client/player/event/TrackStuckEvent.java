@@ -27,8 +27,8 @@ import lavalink.client.player.IPlayer;
 
 public class TrackStuckEvent extends PlayerEvent {
 
-    private AudioTrack track;
-    private long thresholdMs;
+    private final AudioTrack track;
+    private final long thresholdMs;
 
     public TrackStuckEvent(IPlayer player, AudioTrack track, long thresholdMs) {
         super(player);

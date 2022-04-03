@@ -44,12 +44,14 @@ public class LavalinkPlayer implements IPlayer {
     private int volume = 100;
     private long updateTime = -1;
     private long position = -1;
-    /** Lazily initialized */
+    /**
+     * Lazily initialized
+     */
     private Filters filters = null;
     private boolean connected = false;
 
     private final Link link;
-    private List<IPlayerEventListener> listeners = new CopyOnWriteArrayList<>();
+    private final List<IPlayerEventListener> listeners = new CopyOnWriteArrayList<>();
 
     /**
      * Constructor only for internal use
@@ -170,13 +172,13 @@ public class LavalinkPlayer implements IPlayer {
         json.put("position", position);
         //noinspection ConstantConditions
         link.getNode(true).send(json.toString());
-        
+
         this.position = position;
     }
 
     /**
-     * @deprecated Please use the new filters system to specify volume
      * @see LavalinkPlayer#getFilters()
+     * @deprecated Please use the new filters system to specify volume
      */
     @Override
     public void setVolume(int volume) {

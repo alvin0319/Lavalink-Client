@@ -179,7 +179,7 @@ public class Filters {
 
     /**
      * Commits these filters to the Lavalink server.
-     *
+     * <p>
      * The client may choose to commit changes at any time, even if this method is never invoked.
      */
     public void commit() {
