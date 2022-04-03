@@ -6,10 +6,7 @@ import lavalink.client.io.GuildUnavailableException;
 import lavalink.client.io.Link;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.GuildVoiceState;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +21,8 @@ public class JdaLink extends Link {
         this.lavalink = lavalink;
     }
 
-    public void connect(@NonNull VoiceChannel voiceChannel) {
-        connect(voiceChannel, true);
+    public void connect(@NonNull AudioChannel audioChannel) {
+        connect(audioChannel, true);
     }
 
     /**
@@ -34,7 +31,7 @@ public class JdaLink extends Link {
      * @param channel Channel to connect to
      */
     @SuppressWarnings("WeakerAccess")
-    void connect(@NonNull VoiceChannel channel, boolean checkChannel) {
+    void connect(@NonNull AudioChannel channel, boolean checkChannel) {
         if (!channel.getGuild().equals(getJda().getGuildById(guild)))
             throw new IllegalArgumentException("The provided VoiceChannel is not a part of the Guild that this AudioManager handles." +
                     "Please provide a VoiceChannel from the proper Guild");
@@ -53,7 +50,11 @@ public class JdaLink extends Link {
             return;
 
         if (voiceState.inAudioChannel()) {
-            final int userLimit = channel.getUserLimit(); // userLimit is 0 if no limit is set!
+            int userLimit = 0; // userLimit is 0 if no limit is set!
+            if (channel instanceof VoiceChannel) {
+                VoiceChannel voiceChannel = (VoiceChannel) channel;
+                userLimit = voiceChannel.getUserLimit();
+            }
             if (!self.isOwner() && !self.hasPermission(Permission.ADMINISTRATOR)) {
                 if (userLimit > 0                                                      // If there is a userlimit
                         && userLimit <= channel.getMembers().size()                    // if that userlimit is reached
@@ -91,9 +92,14 @@ public class JdaLink extends Link {
 
     @Override
     protected void queueAudioConnect(long channelId) {
-        VoiceChannel vc = getJda().getVoiceChannelById(channelId);
-        if (vc != null) {
-            getJda().getDirectAudioController().connect(vc);
+        AudioChannel ac = null;
+        if (getGuild().getVoiceChannelById(channelId) != null) {
+            ac = getGuild().getVoiceChannelById(channelId);
+        } else if (getGuild().getStageChannelById(channelId) != null) {
+            ac = getGuild().getStageChannelById(channelId);
+        }
+        if (ac != null) {
+            getJda().getDirectAudioController().connect(ac);
         } else {
             log.warn("Attempted to connect, but voice channel {} was not found", channelId);
         }
